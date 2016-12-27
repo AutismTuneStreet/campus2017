@@ -3,12 +3,41 @@
     <head>
         <meta charset="utf-8">
         <style type="text/css">
-        	img{
-        		width:100%;
-        		height:100%;
-        	}
+            *{
+                margin:0;
+                padding:0;
+            }
+            #container{
+                margin:0 auto;
+            }
+            #nav{
+                width:1267px;
+                overflow: hidden;
+            }
+            #nav img{
+                float:left;
+                margin: 0 110px 0 150px;
+            }
+            #nav ul{
+                float:left;
+            }
+            #nav ul li{
+                list-style: none;
+                float:left;
+                height:85px;
+                line-height: 85px;
+                color:#33A7DC;
+                padding:0 16px;
+            }
+            #nav ul li a{
+                text-decoration: none;
+            }
         	#mask{
-        		background-color:#000000;
+                width:100%;
+                height:100%;
+                position:fixed;
+                top:0;
+        		background-color:#000;
         		opacity:0.5; 
         		-moz-opacity:0.5; 
         		filter:alpha(opacity=50);
@@ -23,16 +52,39 @@
 				margin:auto;
 				width:800px;
 				height:545px;
-				background-image: url(images/close.png) 802px -10px no-repeat;
 				z-index:1001;
         	}
+
+            #close{
+                display:inline-block;
+                width:28px;
+                height:28px;
+                background:url(images/close.png) 0 0 no-repeat;
+                position:absolute;
+                left:786px;
+                top:-14px;
+            }
+            #close:hover{
+                background:url(images/close.png) -32px 0 no-repeat;
+            }
         </style>
     </head>
     <body>
-    	<img src="images/m_taobao.png" usemap="android" id='try'>
-    	<map name="android" id="android">
-    		<area shape="rect" coords="640,90,50,12"/>
-    	</map>
+        <div id='container'>
+            <img src="images/head.png">
+            <div id='nav'>
+                <img src="images/flag.png">
+                <ul>
+                    <li id="btn"><a href="#">Android</a></li>
+                    <li><a href="#">iPhone</a></li>
+                    <li><a href="#">iPad</a></li>
+                    <li><a href="#">AndroidPad</a></li>
+                    <li><a href="#">WinPhone</a></li>
+                    <li><a href="#">软件市场</a></li>
+                </ul>
+            </div>
+            <img src="images/m_taobao.png">
+        </div>
     </body>
     <script type="text/javascript">
     	//封装的弹出层 	
@@ -46,23 +98,29 @@
     	    //创建遮罩层
     	    var mask=document.createElement("div");
     	    mask.id = 'mask';
-    	    mask.style.width=sWidth+'px';
-    	    mask.style.height=sHeight+'px';
     	    document.body.appendChild(mask);
     	    //创建弹出图片
     	    var pic=document.createElement("div");
     	    pic.id="pic";
     	    var image=document.createElement('img');
     	    image.src="images/layer.png";
-    	    pic.appendChild(image);
-    	   	document.body.appendChild(pic);    
+            pic.appendChild(image);
+            var close = document.createElement('b');
+            close.id = 'close';
+    	    pic.appendChild(close);
+    	   	document.body.appendChild(pic);  
+            //关闭功能的实现
+            close.addEventListener('click',function(){
+                pic.style.display = 'none';
+                mask.style.display = 'none';
+            },false)  
     	}	                    
     	window.onload=function(){
-    	    var oBtn=document.getElementById("try");
+    	    var oBtn=document.getElementById("btn");
     	    oBtn.onclick=function(){
     	        pop();
     	    }
-    	                
+    	              
     	}
     </script>
 </html>
